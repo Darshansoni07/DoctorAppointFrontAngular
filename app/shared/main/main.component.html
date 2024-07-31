@@ -1,0 +1,188 @@
+<app-header></app-header>
+<main>
+
+    <!-- =======================
+    Main Banner START -->
+    <section class="pt-0">
+        <div class="container">
+            <!-- Background image -->
+            <div class="rounded-3 p-3 p-sm-5"
+                style="background-image: url(assets/images/bg/05.jpg); background-position: center center; background-repeat: no-repeat; background-size: cover;">
+                <!-- Banner title -->
+                <div class="row my-2 my-xl-5">
+                    <div class="col-md-8 mx-auto">
+                        <h1 class="text-center text-white">Stay at Home. Book you Appointment Online</h1>
+                    </div>
+                </div>
+
+                <!-- Booking from START -->
+                <form class="bg-mode shadow rounded-3 position-relative p-4 pe-md-5 pb-5 pb-md-4 mb-4">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-lg-12">
+                            <div class="form-control-border form-control-transparent form-fs-md d-flex">
+                                <i class="fas fa-heartbeat fs-3 me-2 mt-2"></i>
+                                <div class="flex-grow-1">
+                                    <!-- <select class="form-select js-choice" data-search-enabled="true" [(ngModel)]="filterKey" name="filterKey">
+                                        <option value="">Select for any health keyword</option>
+                                        <option>Acne/Pimples</option>
+                                        <option>Depression</option>
+                                        <option>Diabetes</option>
+                                        <option>Hair Fall</option>
+                                    </select> -->
+                                    <input type="text" class="form-control" [(ngModel)]="filterKey"
+                                        placeholder="Search here for specialist" name="filterKey">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-position-md-middle">
+                        <a class="icon-lg btn btn-round btn-primary mb-0" (click)="applyFilter()"><i
+                                class="bi bi-search fa-fw"></i></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    Main Banner END -->
+
+    <!-- =======================
+    Hotel list START -->
+    <section class="pt-0">
+        <div class="container">
+            <!-- Tabs and alert START -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <!-- Alert box START -->
+                    <div class="alert alert-danger alert-dismissible d-flex justify-content-between align-items-center rounded-3 fade show mb-4 mb-0 pe-2"
+                        role="alert">
+                        <div class="d-flex">
+                            <span class="alert-heading h5 mb-0 me-2"><i
+                                    class="bi bi-exclamation-octagon-fill"></i></span>
+                            <span><strong class="alert-heading me-2">Covid Policy:</strong>You may require to present an
+                                RT-PCR negative test report at the Appointment</span>
+                        </div>
+                        <button type="button" class="btn btn-link pb-0 text-end" data-bs-dismiss="alert"
+                            aria-label="Close"><i class="bi bi-x-lg text-dark"></i></button>
+                    </div>
+                    <!-- Alert box END -->
+
+                    <!-- Buttons -->
+                    <div class="hstack gap-3 justify-content-between justify-content-md-end">
+                        <!-- Filter offcanvas button -->
+                        <!-- <button class="btn btn-primary-soft btn-primary-check mb-0 d-xl-none" type="button"
+                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar"
+                            aria-controls="offcanvasSidebar">
+                            <i class="fa-solid fa-sliders-h me-1"></i> Show filters
+                        </button> -->
+                        <!-- tabs -->
+                        <!-- <ul class="nav nav-pills nav-pills-dark" id="tour-pills-tab" role="tablist">
+                            
+                            <li class="nav-item">
+                                <a class="nav-link rounded-start rounded-0 mb-0 active" href="hotel-list.html"><i class="bi fa-fw bi-list-ul"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link rounded-end rounded-0 mb-0" href="hotel-grid.html"><i class="bi fa-fw bi-grid-fill"></i></a>
+                            </li>
+                        </ul> -->
+                    </div>
+                </div>
+            </div>
+            <!-- Tabs and alert END -->
+
+            <div class="row mb-4">
+                <!-- Left sidebar START -->
+
+                <!-- Left sidebar END -->
+
+                <!-- Main content START -->
+                <div class="col-12">
+                    <div class="vstack gap-4">
+
+                        <!-- Card item START -->
+                        <div class="card shadow p-3" *ngFor="let doctor of getAllDoctorData">
+                            <div class="row g-0">
+                                <!-- Card img -->
+                                <div class="col-md-5 col-xl-3">
+                                    <div class="rounded-3 px-6 py-6">
+                                        <img [src]="doctor.profile_Img" class="card-img rounded-5" alt="Card image">
+                                    </div>
+                                </div>
+
+                                <!-- Card body -->
+                                <div class="col-md-7">
+                                    <div class="card-body py-md-2 d-flex flex-column h-100">
+                                        <!-- Title -->
+                                        <h5 class="card-title mb-1"><a
+                                                (click)="getDoctorById(doctor.userDetailsUser_Id)">Dr. {{
+                                                doctor.first_Name }} {{
+                                                doctor.last_Name }}</a></h5>
+                                        <small><i class="bi bi-plus-alt me-2"></i>{{ doctor.specialist }}</small>
+                                        <!-- Amenities -->
+                                        <ul class="nav nav-divider mt-3">
+                                            <li class="nav-item">{{ doctor.license }}</li>
+                                            <!-- Assuming license is the MBBS, MS etc. -->
+                                            <li class="nav-item">{{ doctor.specialist }}</li>
+                                            <li class="nav-item">Age {{ doctor.age }}</li>
+                                            <!-- Assuming specialist is the type of surgery -->
+                                            <!-- Add other properties here -->
+                                        </ul>
+
+                                        <!-- List -->
+                                        <ul class="list-group list-group-borderless small mb-0 mt-2">
+                                            <li class="list-group-item d-flex text-danger p-0">
+                                                <i class="bi bi-patch-check-fill me-2"></i>Non Refundable
+                                            </li>
+                                        </ul>
+
+                                        <!--Price and Button-->
+                                        <div
+                                            class="d-sm-flex justify-content-sm-between align-items-center mt-3 mt-md-auto">
+                                            <!-- Button -->
+                                            <div class="d-flex align-items-center">
+                                                <h5 class="fw-bold mb-0 me-1">{{ doctor.feesAmount }}</h5>
+                                                <!-- Assuming feesAmount is the price -->
+                                                <span class="mb-0 me-2">/day</span>
+                                            </div>
+                                            <!-- Price -->
+                                            <div class="mt-3 mt-sm-0">
+                                                <a (click)="getDoctorById(doctor.userDetailsUser_Id)"
+                                                    class="btn btn-sm btn-dark mb-0 w-100">Select</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card item END -->
+
+                        <!-- Pagination -->
+                        <nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
+                            <ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                                <li class="page-item mb-0" (click)="onPageChange(pageIndex - 1)"><a class="page-link"
+                                        tabindex="-1"><i class="fa-solid fa-angle-left"></i></a></li>
+                                <li class="page-item mb-0" *ngFor="let i of getPaginationIndices()"><a class="page-link"
+                                        [class.active]="pageIndex === i">{{pageIndex+1}}</a></li>
+                                <li class="page-item mb-0" (click)="onNextButtonClick()"
+                                    [class.disabled]="isNextButtonDisabled()">
+                                    <a class="page-link">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                    </div>
+                </div>
+                <!-- Main content END -->
+            </div> <!-- Row END -->
+
+            <div class="iframe-container" style="height: 500px; width: 450px;">
+                <iframe src="https://copilotstudio.microsoft.com/environments/Default-4450a7f6-cb3f-4cd9-8e40-4d16c3b75e21/bots/cre7f_powerData/webchat?__version__=2" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+              </div>
+        </div>
+    </section>
+    <!-- =======================
+    Hotel list END -->
+
+</main>

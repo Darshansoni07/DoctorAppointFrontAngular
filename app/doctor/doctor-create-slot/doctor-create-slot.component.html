@@ -1,0 +1,66 @@
+<!-- =======================
+Search START -->
+<div class="container vstack gap-4">
+    <!-- Title START -->
+    <div class="row">
+        <div class="col-12">
+            <h1 class="fs-4 mb-0"><i class="fas fa-plus fa-fw me-1"></i>Create Slot</h1>
+        </div>
+    </div>	
+		<div class="row">
+			<div class="col-12">
+				<!-- Booking from START -->
+				<div class="form-control-bg-light bg-mode border p-4 rounded-3">	
+	
+					<!-- Tab content START -->
+					<div class="tab-content mt-0" id="pills-tabContent">
+						<!-- One way tab START -->
+						<div class="tab-pane fade show active" id="cab-one-way" role="tabpanel" aria-labelledby="cab-one-way-tab">
+							<form [formGroup]="slotForm" class="row g-4 align-items-center" (ngSubmit)="createSlot()">
+								<div class="col-xl-10">
+									<div class="row g-4">										
+			
+										<!-- Drop -->
+										<div class="col-md-6 col-xl-4">
+											<div class="form-size-lg">
+												<label class="form-label">Select Time Session:</label>
+												<select class="form-select js-choice" data-search-enabled="true" aria-label=".form-select-sm" formControlName="interval">
+													<option value="">Select Session</option>
+                                                    <option value="00:30:00">30 minutes</option>
+                                                    <option value="01:00:00">1 hour</option>
+                                                    <option value="02:00:00">2 hours</option>
+												</select>
+											</div>
+										</div>
+			
+										 <!-- Date -->
+										 <div class="col-md-6 col-xl-4">
+                                            <label class="form-label">Start Time Slot</label>
+                                            <input type="text" class="form-control form-control-lg flatpickr" data-enableTime="false" placeholder="Select date" formControlName="startTimeslot">
+											<input type="hidden" formControlName="">
+                                          </div>
+                                          
+                                          <div class="col-md-6 col-xl-4">
+                                            <label class="form-label">End Time Slot</label>
+                                            <input type="text" class="form-control form-control-lg flatpickr" data-enableTime="true" data-noCalendar="true" placeholder="Select time" formControlName="endTimeslot">
+                                          </div>
+									</div>	
+								</div>		
+			
+								<div class="col-xl-2 d-grid mt-xl-auto">
+									<button class="btn btn-lg btn-primary mb-0" type="submit">Create Slot</button>
+								</div>
+							</form>
+						</div>
+						<!-- One way tab END -->
+	
+					</div>
+					<!-- Tab content END -->
+				</div>
+				<!-- Booking from END -->
+			</div>
+		</div>
+</div>
+
+<!-- =======================
+Search START -->

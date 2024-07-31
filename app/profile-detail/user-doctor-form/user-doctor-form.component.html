@@ -1,0 +1,33 @@
+<!-- Card body START -->
+<div class="card-body" *ngIf="userDetail.roles_UserRole_Id == 2">
+    <!-- Form START -->
+    <form class="row g-3" [formGroup]="doctorMetaForm">
+
+        <!-- Name -->
+        <div class="col-md-6">
+            <label class="form-label">Specialist<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter your Specialist" formControlName="Specialist">
+            <input type="hidden" value="" formControlName="UserDetailsUser_Id">
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">License<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter your License No." formControlName="License">
+        </div>
+        <!-- Mobile -->
+        <div class="col-md-6">
+            <label class="form-label">Appointment charge Fees<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter your Appointment charge Fees"
+                formControlName="FeesAmount">
+        </div>
+
+        <!-- Button -->
+        <div class="col-12 text-end" *ngIf="!(SubmitCheck)">
+            <button type="submit" (click)="onSubmit()" class="btn btn-primary mb-0">Submit</button>
+        </div>
+        <div class="col-12 text-end" *ngIf="(SubmitCheck)">
+            <button type="submit" (click)="OnUpdate()" class="btn btn-primary mb-0">Update</button>
+        </div>
+    </form>
+    <!-- Form END -->
+</div>
+<!-- Card body END -->

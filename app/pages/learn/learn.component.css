@@ -1,0 +1,19 @@
+.paginator-container {
+    margin-top: 10px; /* Adjust as needed */
+    display: flex;
+    justify-content: center;
+    display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.paginator-inner-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  

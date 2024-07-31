@@ -1,0 +1,63 @@
+<main>      
+    <!-- =======================
+    Main content START -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <form class="vstack gap-4" [formGroup]="registerForm" (ngSubmit)="OnSubmit()">
+    
+                        <!-- Owner Detail START -->
+                        <div class="card shadow">
+                            <!-- Card header -->
+                            <div class="card-header border-bottom">
+                                <h5 class="mb-0">Add Assistant</h5>
+                            </div>
+    
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <!-- Assistant name -->
+                                    <div class="col-12">
+                                        <label class="form-label">Assistant name</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="First name" formControlName="First_Name">
+                                            <input type="text" class="form-control" placeholder="Last name" formControlName="Last_Name">
+                                            <input type="hidden" value="" formControlName="MetadataDoc_meta_Id">
+                                        </div>
+                                    </div>
+    
+                                    <!-- Contact number -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Contact number</label>
+                                        <input class="form-control" type="text" placeholder="Enter contact number" formControlName="PhoneNumber">
+                                    </div>
+    
+                                    <!-- Email -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Email address</label>
+                                        <input class="form-control" type="email" placeholder="Enter email address" formControlName="Email">
+                                    </div>
+                                    
+                                    <div class="mb-3 position-relative">
+                                        <label class="form-label">Enter password</label>
+                                        <input class="form-control fakepassword" type="password" id="psw-input"
+                                            formControlName="Password">
+                                        <span class="position-absolute top-50 end-0 translate-middle-y p-0 mt-3">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Button -->
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary w-100 mb-0">Add Assistant</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    Main content END -->    
+    </main>

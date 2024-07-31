@@ -1,0 +1,11 @@
+.card-img-scale-wrapper {
+	  width: 50%;
+	  height: 200px; /* Set a fixed height for all images */
+	  overflow: hidden;
+	}
+  
+	.card-img {
+	  width: 50%;
+	  height: 100%; /* Make the image fill the container */
+	  object-fit: cover; /* Maintain aspect ratio and cover the container */
+	}

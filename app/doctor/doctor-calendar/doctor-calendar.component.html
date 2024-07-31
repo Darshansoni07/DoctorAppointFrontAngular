@@ -1,0 +1,117 @@
+<div class="container" [ngClass]="{'modal-open':showModal}">
+  <div class="card shadow mt-5">
+    <!-- Card body START -->
+    <div class="card-body">
+      <mat-calendar [selected]="selectedDate" (selectedChange)="onDateChange($event)"></mat-calendar>
+
+    </div>
+  </div>
+  <!-- <div class="card shadow mt-5">
+
+      <div class="card-body">
+    <h3>Add New Event</h3>
+    <form #eventForm="ngForm" (ngSubmit)="createEvent(eventForm.value.title, eventForm.value.date, eventForm.value.time, eventForm.value.description)">
+        
+      <input type="text" name="title" ngModel placeholder="Title" required>
+      <input type="date" name="date" ngModel required>
+      <input type="time" name="time" ngModel>
+      <div class="col-md-10">
+      <textarea name="description" ngModel placeholder="Description"></textarea>
+    </div>
+      <button type="submit">Add Event</button>
+  
+    </form>
+      </div>
+    </div> -->
+</div>
+
+<!--===================================================================== DATA OF CALENDAR IN POPUP=================================================================-->
+
+<div *ngIf="showModal">
+
+  <div class="modal" tabindex="-1" role="dialog" style="display: block;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Appointment</h5>
+          <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="container vstack gap-4">
+          <!-- Title START -->
+
+          <div class="row">
+            <div class="col-12">
+              <div class="card border rounded-3">
+                <!-- Card header START -->
+                
+                <!-- Card header END -->
+
+                <!-- Card body START -->
+                <div class="card-body">
+                  <!-- Search and select START -->
+                  <div class="row g-3 align-items-center justify-content-between mb-3">
+                    <!-- Search -->
+                  </div>
+                  <!-- Search and select END -->
+
+                  <!-- Hotel room list START -->
+                  <div class="table-responsive border-0">
+                    <table class="table align-middle p-4 mb-0 table-hover table-shrink">
+                      <!-- Table head -->
+                      <thead class="table-light">
+                        <tr>
+                          <th scope="col" class="border-0">Name</th>
+                          <th scope="col" class="border-0">Mobile Number</th>
+                          <th scope="col" class="border-0">Appointment Time</th>
+                          <th scope="col" class="border-0">Status</th>
+                        </tr>
+                      </thead>
+
+                      <!-- Table body START -->
+                      <tbody class="border-top-0">
+                        <tr *ngFor="let appoint of appointmentData">
+                          
+                          <td>
+                            <h6 class="mb-0"><a>{{appoint.first_Name}} {{appoint.last_Name}}</a></h6>
+                          </td>
+                          <td> {{appoint.phoneNumber}}</td>
+                          <td> {{appoint.appointmentTime |date:'dd-MMM-yyyy'}} {{appoint.appointmentTime | date:
+                            'h:mm a'}}</td>
+                          <td *ngIf="appoint.status=='Booked'">
+                            <div class="badge text-bg-success">Booked</div>
+                          </td>
+                          <td *ngIf="appoint.status=='Checked'">
+                            <div class="badge text-bg-info">Checked</div>
+                          </td>
+                          <td *ngIf="appoint.status=='Available'">
+                            <div class="badge text-bg-warning">Available</div>
+                          </td>
+                          <td *ngIf="appoint.status=='Cancel'">
+                            <div class="badge text-bg-danger">Cancel</div>
+                          </td>
+                          <td *ngIf="appoint.status=='Pending'">
+                            <div class="badge text-bg-danger">Pending</div>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <!-- Table body END -->
+                    </table>
+                  </div>
+                  <!-- Hotel room list END -->
+                </div>
+                <!-- Card body END -->
+
+                <!-- Card footer START -->
+
+                <!-- Card footer END -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

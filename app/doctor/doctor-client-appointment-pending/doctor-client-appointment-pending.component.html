@@ -1,0 +1,57 @@
+<div class="page-content-wrapper p-xxl-4" [ngClass]="{'modal-open':showModal}">
+    <mat-table [dataSource]="dataMat" matSort class="mat-elevation-z8">
+
+        <!-- Table columns -->
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="first_Name">
+            <mat-header-cell mat-sort-header mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let appointment">
+            <a (click)="OnSelectUserDetailsById(appointment.userDetailsUser_Id)">{{ appointment.first_Name }} {{
+                    appointment.last_Name }}</a>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Mobile Number Column -->
+        <ng-container matColumnDef="phoneNumber">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile Number</mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let appointment">{{ appointment.phoneNumber }}</mat-cell>
+        </ng-container>
+
+        <!-- Appointment Time Column -->
+        <ng-container matColumnDef="appointmentTime">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Appointment Time</mat-header-cell>
+            <mat-cell *matCellDef="let appointment">{{ appointment.appointmentTime
+                | date:'dd-MMM-yyyy hh:mm a'}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+            <mat-cell *matCellDef="let appointment" [ngClass]="{
+                        'text-danger': appointment.status === 'Pending'
+                    }">
+                <b>{{appointment.status}}</b>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Action">
+            <mat-header-cell *matHeaderCellDef >Action</mat-header-cell>
+            <mat-cell *matCellDef="let appointment">
+                <a (click)="onSelectPendingAppointId(appointment.appointment_Id)"
+                    class="bi bi-check-square fa-fw me-2"></a>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Header and Rows -->
+        <mat-header-row
+            *matHeaderRowDef="['first_Name', 'phoneNumber', 'appointmentTime', 'status','Action']"></mat-header-row>
+        <mat-row
+            *matRowDef="let row; columns: ['first_Name', 'phoneNumber', 'appointmentTime','status','Action']"></mat-row>
+    </mat-table>
+
+    <!-- Pagination -->
+    <div class="paginator-container mat-elevation-z8">
+        <mat-paginator #paginator [pageSizeOptions]="[5]" [length]="totalItem" showFirstLastButtons></mat-paginator>
+    </div>
+
+</div>

@@ -1,0 +1,184 @@
+<!-- Page main content START -->
+<div class="page-content-wrapper p-xxl-4" [ngClass]="{'modal-open':showModal}">
+
+	<!-- Title -->
+	<div class="row">
+		<div class="col-12 mb-4 mb-sm-5">
+			<div class="d-sm-flex justify-content-between align-items-center">
+				<h1 class="h3 mb-3 mb-sm-0">Paitent List</h1>
+			</div>
+		</div>
+	</div>
+
+	<!-- Filters START -->
+	<div class="row g-4 align-items-center">
+	</div>
+	<!-- Filters END -->
+
+	<!-- Guest list START -->
+	<div class="card shadow mt-5">
+		<!-- Card body START -->
+		<div class="card-body">
+			<!-- Table head -->
+			<div class="bg-light rounded p-3 d-none d-lg-block">
+				<div class="row row-cols-7 g-4">
+					<div class="col">
+						<h6 class="mb-0">Paitent</h6>
+					</div>
+					<div class="col">
+						<h6 class="mb-0">Email</h6>
+					</div>
+					<div class="col">
+						<h6 class="mb-0">Created-On</h6>
+					</div>
+					<div class="col">
+						<h6 class="mb-0">Updated-On</h6>
+					</div>
+					<div class="col">
+						<h6 class="mb-0">PhoneNumber</h6>
+					</div>
+					<!-- <div class="col"><h6 class="mb-0">Status</h6></div> -->
+					<div class="col">
+						<h6 class="mb-0">Action</h6>
+					</div>
+				</div>
+			</div>
+
+			<!-- Table data  loop yha lagega -->
+			<div *ngFor="let client of ClientData"
+				class="row row-cols-xl-7 align-items-lg-center border-bottom g-4 px-2 py-4">
+				<!-- Data item -->
+				<div class="col">
+					<small class="d-block d-lg-none">Booked by:</small>
+					<div class="d-flex align-items-center">
+						<!-- Avatar -->
+						<div class="avatar avatar-xs flex-shrink-0">
+							<img class="avatar-img rounded-circle" src={{client.profile_Img}} alt="avatar">
+						</div>
+						<!-- Info -->
+						<div class="ms-2">
+							<h6 class="mb-0 fw-light">{{client.first_Name}} {{client.last_Name}}</h6>
+						</div>
+					</div>
+				</div>
+
+				<!-- Data item -->
+				<div class="col">
+					<small class="d-block d-lg-none">Email</small>
+					<h6 class="mb-0 fw-normal">{{client.email}}</h6>
+				</div>
+
+				<!-- Data item -->
+				<div class="col">
+					<small class="d-block d-lg-none">Created-On:</small>
+					<h6 class="mb-0 fw-normal">{{client.createdOn | date:'dd-MMM-yyyy'}}</h6>
+				</div>
+
+				<!-- Data item -->
+				<div class="col">
+					<small class="d-block d-lg-none">Update-On</small>
+					<h6 class="mb-0 fw-normal">{{client.updatedOn | date:'dd-MMM-yyyy'}}</h6>
+				</div>
+
+				<!-- Data item -->
+				<div class="col">
+					<small class="d-block d-lg-none">PhoneNumber</small>
+					<h6 class="mb-0 fw-normal">{{client.phoneNumber}}</h6>
+				</div>
+
+				<div class="col"><a (click)="onSelectById(client.user_Id)" class="bi bi-pencil-square fa-fw me-2"></a>
+				</div>
+			</div>
+		</div>
+		<!-- Card body END -->
+
+		<!-- Card footer START -->
+		<div class="card-footer pt-0">
+			<!-- Pagination and content -->
+			<div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+				<!-- Content -->
+
+				<!-- Pagination -->
+				<nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
+					<ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+						<li class="page-item mb-0" (click)="onPageChange(pageIndex - 1)"><a class="page-link"
+								tabindex="-1"><i class="fa-solid fa-angle-left"></i></a></li>
+						<li class="page-item mb-0" *ngFor="let i of getPaginationIndices()"><a class="page-link"
+								[class.active]="pageIndex === i" (click)="onPageChange(i)">{{pageIndex+1}}</a></li>
+						<li class="page-item mb-0" (click)="onNextButtonClick()"
+							[class.disabled]="isNextButtonDisabled()">
+							<a class="page-link">
+								<i class="fa-solid fa-angle-right"></i>
+							</a>
+						</li>
+					</ul>
+				</nav>
+
+			</div>
+		</div>
+		<!-- Card footer END -->
+	</div>
+	<!-- Guest list END -->
+</div>
+<!-- Page main content END -->
+
+<div *ngIf="showModal">
+	<div class="modal" tabindex="-1" role="dialog" style="display: block;">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Edit Client Details</h5>
+					<button type="button" class="close" (click)="closeModal()">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="card border">
+					<!-- Card header -->
+
+
+					<!-- Card body START -->
+					<div class="card-body">
+						<!-- Form START -->
+						<form class="row g-3" [formGroup]="updateForm">
+							<!-- Profile photo -->
+
+							<!-- Name -->
+							<div class="col-md-6">
+								<label class="form-label">First Name<span class="text-danger">*</span></label>
+								<input type="text" class="form-control" placeholder="Enter your full name"
+									formControlName="first_Name">
+							</div>
+							<div class="col-md-6">
+								<label class="form-label">Last Name<span class="text-danger">*</span></label>
+								<input type="text" class="form-control" placeholder="Enter your full name"
+									formControlName="last_Name">
+							</div>
+							<div class="col-md-6">
+								<label class="form-label">Email address<span class="text-danger">*</span></label>
+								<input type="email" class="form-control" placeholder="Enter your email id"
+									formControlName="email">
+							</div>
+							<div class="col-md-6">
+								<label class="form-label">Mobile number<span class="text-danger">*</span></label>
+								<input type="text" class="form-control" placeholder="Enter your mobile number"
+									formControlName="phoneNumber">
+							</div>
+
+
+							<!-- Button -->
+							<div class="col-12 text-end">
+								<button type="button" class="btn btn-primary" (click)="updateOnSelect()">Save
+									changes</button>
+								<button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+
+							</div>
+						</form>
+						<!-- Form END -->
+					</div>
+					<!-- Card body END -->
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

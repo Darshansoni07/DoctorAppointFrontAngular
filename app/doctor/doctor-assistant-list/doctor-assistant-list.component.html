@@ -1,0 +1,81 @@
+<div class="container vstack gap-4">
+    <!-- Title START -->
+    <div class="row">
+        <div class="col-12">
+            <h1 class="fs-4 mb-0"><i class="bi bi-journals fa-fw me-1"></i>Assistant List</h1>
+        </div>
+    </div>
+    <!-- Title END -->
+
+    <!-- Booking table START -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border">
+                <!-- Card header START -->
+                <div class="card-header border-bottom">
+                    <h5 class="card-header-title">Assistant List</h5>
+                </div>
+                <!-- Card header END -->
+
+                <!-- Card body START -->
+                <div class="card-body">
+                    <mat-table [dataSource]="dataMat" matSort class="mat-elevation-z8">
+        
+                        <!-- Table columns -->
+        
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="first_Name">
+                            <mat-header-cell mat-sort-header mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                            <mat-cell mat-cell *matCellDef="let appointment"><b>{{ appointment.first_Name }} {{
+                                appointment.last_Name }}</b>
+                            </mat-cell>
+                        </ng-container>
+        
+                        <!-- Mobile Number Column -->
+                        <ng-container matColumnDef="email">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                            <mat-cell mat-cell *matCellDef="let appointment">{{ appointment.email }}</mat-cell>
+                        </ng-container>
+        
+                        <!-- Appointment Time Column -->
+                        <ng-container matColumnDef="createdOn">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Create On</mat-header-cell>
+                            <mat-cell *matCellDef="let appointment">{{ appointment.createdOn 
+                            | date:'dd-MMM-yyyy HH:mma'}}</mat-cell>
+                        </ng-container>
+        
+                        <!-- Mobile Number Column -->
+                        <ng-container matColumnDef="phoneNumber">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile Number</mat-header-cell>
+                            <mat-cell mat-cell *matCellDef="let appointment">{{ appointment.phoneNumber }}</mat-cell>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="isEmailVerified">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                            <mat-cell *matCellDef="let appointment" [ngClass]="{
+                                'text-success': appointment.isEmailVerified,
+                                'text-danger': !appointment.isEmailVerified
+                            }">
+                                {{ appointment.isEmailVerified ? 'Approved' : 'Pending' }}
+                            </mat-cell>
+                        </ng-container>
+                        
+        
+                        <!-- Header and Rows -->
+                        <mat-header-row
+                            *matHeaderRowDef="['first_Name', 'email', 'createdOn', 'phoneNumber','isEmailVerified']"></mat-header-row>
+                        <mat-row
+                            *matRowDef="let row; columns: ['first_Name', 'email', 'createdOn','phoneNumber','isEmailVerified']"></mat-row>
+                    </mat-table>
+        
+                    <!-- Pagination -->
+                    <div class="paginator-container mat-elevation-z8">
+                        <mat-paginator #paginator [pageSizeOptions]="[5]" [length]="totalItem"
+                            showFirstLastButtons></mat-paginator>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,272 @@
+<div class="page-content-wrapper p-xxl-4">
+
+    <!-- Title -->
+    <div class="row">
+        <div class="col-12 mb-4 mb-sm-5">
+            <div class="d-sm-flex justify-content-between align-items-center">
+                <h1 class="h3 mb-2 mb-sm-0">Dashboard</h1>
+                <!-- <div class="d-grid"><a href="#" class="btn btn-primary-soft mb-0"><i class="bi bi-plus-lg fa-fw"></i> New Booking</a></div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Counter boxes START -->
+    <div class="row g-4 mb-5">
+        <!-- Counter item -->
+        <div class="col-md-6 col-xxl-3">
+            <div class="card card-body bg-warning bg-opacity-10 border border-warning border-opacity-25 p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-0">{{TotalApprovedDoctor}}</h4>
+                        <span class="h6 fw-light mb-0">Total Doctor</span>
+                    </div>
+                    <div class="icon-lg rounded-circle bg-warning text-white mb-0"><i
+                            class="bi bi-person-check-fill"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Counter item -->
+        <div class="col-md-6 col-xxl-3">
+            <div class="card card-body bg-success bg-opacity-10 border border-success border-opacity-25 p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                
+                    <div>
+                        <h4 class="mb-0">${{TotalIncome}}</h4>
+                        <span class="h6 fw-light mb-0">Total Incomes</span>
+                    </div>
+                
+                    <div class="icon-lg rounded-circle bg-success text-white mb-0"><i class="fa-solid fa-hand-holding-dollar fa-fw"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Counter item -->
+        <div class="col-md-6 col-xxl-3">
+            <div class="card card-body bg-primary bg-opacity-10 border border-primary border-opacity-25 p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Digit -->
+                    <div>
+                        <h4 class="mb-0">{{TotalPatient}}</h4>
+                        <span class="h6 fw-light mb-0">Total Patient</span>
+                    </div>
+                    <!-- Icon -->
+                    <div class="icon-lg rounded-circle bg-primary text-white mb-0"><i
+                            class="bi bi-person-wheelchair"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Counter item -->
+        <div class="col-md-6 col-xxl-3">
+            <div class="card card-body bg-info bg-opacity-10 border border-info border-opacity-25 p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Digit -->
+                    <div>
+                        <h4 class="mb-0">{{TotalPendingDoctor}}</h4>
+                        <span class="h6 fw-light mb-0">Total Pending Doctor</span>
+                    </div>
+                    <!-- Icon -->
+                    <div class="icon-lg rounded-circle bg-info text-white mb-0"><i
+                            class="bi bi-person-fill-exclamation"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Counter item -->
+        <div class="col-md-6 col-xxl-3">
+            <div class="card card-body bg-info bg-opacity-10 border border-info border-opacity-25 p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Digit -->
+                    <div>
+                        <h4 class="mb-0">{{TotalPendingAssistant}}</h4>
+                        <span class="h6 fw-light mb-0">Total Pending Assistant</span>
+                    </div>
+                    <!-- Icon -->
+                    <div class="icon-lg rounded-circle bg-info text-white mb-0"><i
+                            class="bi bi-person-fill-exclamation"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Counter item -->
+        <div class="col-md-6 col-xxl-3">
+            <div class="card card-body bg-warning bg-opacity-10 border border-warning border-opacity-25 p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-0">{{TotalAssistant}}</h4>
+                        <span class="h6 fw-light mb-0">Total Assistant</span>
+                    </div>
+                    <div class="icon-lg rounded-circle bg-warning text-white mb-0"><i
+                            class="bi bi-person-check-fill"></i></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Counter boxes END -->
+
+    <!-- Widget START -->
+    <div class="row g-4">
+        <!-- Booking Chart START -->
+        <!-- Booking Chart START -->
+        <div class="col-lg-6 col-xxl-4">
+            <!-- Chart START -->
+            <div class="card shadow h-100" *ngIf="charLoaded">
+                <!-- Card header -->
+                <div class="card-header border-bottom">
+                    <h5 class="card-header-title">Activity</h5>
+                </div>
+
+                <!-- Card body -->
+                <div class="card-body" >
+                    <!-- Content -->
+                    <div style="width: 400px; height: 400px;">
+
+                        <ngx-charts-pie-chart [results]="single" [explodeSlices]="explodeSlices" [labels]="showLabels"
+                            [doughnut]="doughnut" [gradient]="gradient"></ngx-charts-pie-chart>
+
+                    </div>
+                    <!-- Apex chart -->
+                </div>
+            </div>
+            <!-- Chart END -->
+        </div>
+        <!-- Booking Chart END -->
+        <!-- Booking Chart END -->
+
+        <!-- Booking graph START -->
+
+        <!-- Booking graph END -->
+
+        <!-- Doctor Pending Request  START -->
+        <div class="col-lg-6 col-xxl-4">
+            <div class="card shadow h-100">
+                <!-- Card header -->
+                <div class="card-header border-bottom d-flex justify-content-between align-items-center">
+                    <h5 class="card-header-title">Doctor Pending Approve</h5>
+                    <a routerLink="/admin/doctorpendinglist" class="btn btn-link p-0 mb-0">View all</a>
+                </div>
+
+                <!-- Card body START -->
+                <div class="card-body p-3">
+                    <div *ngFor="let client of DoctorRequest">
+                        <!-- Arrival item -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <!-- Avatar and info -->
+                            <div class="d-sm-flex align-items-center mb-1 mb-sm-0">
+                                <!-- Avatar -->
+                                <div class="avatar avatar-md flex-shrink-0">
+                                    <img class="avatar-img rounded-circle" src={{client.profile_Img}} alt="avatar">
+                                </div>
+                                <!-- Info -->
+                                <div class="ms-sm-2 mt-2 mt-sm-0">
+                                    <h6 class="mb-1">{{client.first_Name}} {{client.last_Name}} </h6>
+                                    <ul class="nav nav-divider small">
+                                        <li class="nav-item">{{client.email}}</li>
+                                        <li class="nav-item">{{client.phoneNumber}}</li>
+                                        <li class="nav-item">Specialist: {{client.specialist}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Button -->
+                            <button class="btn btn-sm btn-success mb-0 ms-3 px-2"
+                                (click)="getApprovedDoctor(client.doc_meta_Id)">Click to Approve</button>
+                        </div>
+
+                        <hr><!-- Divider -->
+                    </div>
+                </div>
+                <!-- Card body END -->
+
+            </div>
+        </div>
+        <!--Doctor Pending Request END -->
+
+
+
+        <!-- Assistant Pending  START -->
+        <!-- <div class="col-lg-6 col-xxl-4">
+            <div class="card shadow h-100">
+                
+                <div class="card-header border-bottom d-flex justify-content-between align-items-center">
+                    <h5 class="card-header-title">Assitant Pending Approve</h5>
+                    
+                </div>
+                <div class="card-body p-3" >							
+                    <div *ngFor="let client of DoctorRequest">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-sm-flex align-items-center mb-1 mb-sm-0">
+                            <div class="avatar avatar-md flex-shrink-0">
+                                <img class="avatar-img rounded-circle" src={{client.profile_Img}} alt="avatar">
+                            </div>
+                            <div class="ms-sm-2 mt-2 mt-sm-0">
+                                <h6 class="mb-1">{{client.first_Name}} {{client.last_Name}} </h6>
+                                <ul class="nav nav-divider small">
+                                    <li class="nav-item">{{client.email}}</li>
+                                    <li class="nav-item">{{client.phoneNumbet}}</li>
+                                </ul>
+                            </div>
+                        </div>			
+                        
+                    </div>
+
+                    <hr>
+                    </div>
+                </div>
+                
+            </div>
+        </div> -->
+
+
+
+        <!-- Client Details Start -->
+        <div class="col-lg-6 col-xxl-4">
+            <div class="card shadow h-100">
+                <!-- Card header -->
+                <div class="card-header border-bottom d-flex justify-content-between align-items-center p-3">
+                    <h5 class="card-header-title">Paitent Register</h5>
+                    <a routerLink="/admin/paitentlist" class="btn btn-link p-0 mb-0">View all</a>
+                </div>
+
+                <!-- Card body START -->
+                <div class="card-body p-3">
+                    <div *ngFor="let client of ClientData">
+                        <!-- Arrival item -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <!-- Avatar and info -->
+                            <div class="d-sm-flex align-items-center mb-1 mb-sm-0">
+                                <!-- Avatar -->
+                                <div class="avatar avatar-md flex-shrink-0">
+                                    <img class="avatar-img rounded-circle" src={{client.profile_Img}} alt="avatar">
+                                </div>
+                                <!-- Info -->
+                                <div class="ms-sm-2 mt-2 mt-sm-0">
+                                    <h6 class="mb-1">{{client.first_Name}} {{client.last_Name}} </h6>
+                                    <ul class="nav nav-divider small">
+                                        <li class="nav-item">{{client.email}}</li>
+                                        <li class="nav-item">{{client.phoneNumbet}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Button -->
+                            <a href="#" class="btn btn-sm btn-light mb-0 ms-3 px-2"><i
+                                    class="fa-solid fa-chevron-right fa-fw"></i></a>
+                        </div>
+
+                        <hr><!-- Divider -->
+                    </div>
+                </div>
+                <!-- Card body END -->
+            </div>
+        </div>
+        <!-- Client Details End -->
+
+        <!-- Reviews START -->
+
+        <!-- Reviews END -->
+    </div>
+    <!-- Widget END -->
+
+</div>

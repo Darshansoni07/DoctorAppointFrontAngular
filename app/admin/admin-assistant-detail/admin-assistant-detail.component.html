@@ -1,0 +1,118 @@
+<div class="page-content-wrapper p-xxl-4" [ngClass]="{'modal-open':showModal}">
+
+    <!-- Title -->
+    <div class="row">
+        <div class="col-12 mb-4 mb-sm-5">
+            <div class="d-sm-flex justify-content-between align-items-center">
+                <h1 class="h3 mb-3 mb-sm-0">Assistant List</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters START -->
+    <div class="row g-4 align-items-center">
+        <!-- Tabs   serach bar -->
+    </div>
+    <!-- Filters END -->
+
+    <!-- Guest list START -->
+    <div class="card shadow mt-5">
+        <!-- Card body START -->
+        <div class="card-body">
+            <!-- Table head -->
+            <div class="bg-light rounded p-3 d-none d-lg-block">
+                <div class="row row-cols-7 g-4">
+                    <div class="col">
+                        <h6 class="mb-0">Assistant Name</h6>
+                    </div>
+                    <div class="col">
+                        <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col">
+                        <h6 class="mb-0">Doctor Name</h6>
+                    </div>
+                    <div class="col">
+                        <h6 class="mb-0">Specialist</h6>
+                    </div>
+                    <!-- <div class="col"><h6 class="mb-0">Status</h6></div> -->
+                    <!-- <div class="col">
+                        <h6 class="mb-0">Action</h6>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- Table data  loop yha lagega -->
+            <div *ngFor="let client of AssistantData"
+                class="row row-cols-xl-7 align-items-lg-center border-bottom g-4 px-2 py-4">
+                <!-- Data item -->
+                <div class="col">
+                    <small class="d-block d-lg-none">Assistant Name:</small>
+                    <div class="d-flex align-items-center">
+                        <div class="ms-2">
+                            <h6 class="mb-0 fw-light">{{client.assistant_F_Name}} {{client.assistant_L_Name}}</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data item -->
+                <div class="col">
+                    <small class="d-block d-lg-none">Email</small>
+                    <h6 class="mb-0 fw-normal">{{client.email}}</h6>
+                </div>
+
+                <!-- Data item -->
+                <div class="col">
+                    <small class="d-block d-lg-none">Doctor Name:</small>
+                    <h6 class="mb-0 fw-normal">{{client.doc_F_Name}} {{client.doc_L_Name}}</h6>
+                </div>
+
+                <!-- Data item -->
+                <div class="col">
+                    <small class="d-block d-lg-none">Specialist</small>
+                    <h6 class="mb-0 fw-normal">{{client.specialist}}</h6>
+                </div>
+
+                <!-- Data item -->
+                <!-- <div class="col">
+							<small class="d-block d-lg-none">Payment:</small>
+							<div class="badge bg-success bg-opacity-10 text-success">Booked</div>
+						</div> -->
+
+                <!-- Data item (click)="onSelectById(Client.id)"-->
+                <!-- <div class="col"><a (click)="onSelectById(client.userDetailsUser_Id)" class="bi bi-pencil-square fa-fw me-2"></a>
+                </div> -->
+            </div>
+
+
+
+        </div>
+        <!-- Card body END -->
+
+        <!-- Card footer START -->
+        <div class="card-footer pt-0">
+            <!-- Pagination and content -->
+            <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                <!-- Content -->
+
+                <!-- Pagination -->
+                <nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
+                    <ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                        <li class="page-item mb-0" (click)="onPageChange(pageIndex - 1)"><a class="page-link"
+                                tabindex="-1"><i class="fa-solid fa-angle-left"></i></a></li>
+                        <li class="page-item mb-0" *ngFor="let i of getPaginationIndices()"><a class="page-link"
+                                [class.active]="pageIndex === i" (click)="onPageChange(i)">{{pageIndex+1}}</a></li>
+                        <li class="page-item mb-0" (click)="onNextButtonClick()"
+                            [class.disabled]="isNextButtonDisabled()">
+                            <a class="page-link">
+                                <i class="fa-solid fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+        <!-- Card footer END -->
+    </div>
+    <!-- Guest list END -->
+</div>

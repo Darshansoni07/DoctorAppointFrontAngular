@@ -1,0 +1,168 @@
+<app-header></app-header>
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+
+    <!-- =======================
+    Main Banner START -->
+    <section class="pt-4">
+        <div class="container position-relative">
+            <!-- Title and button START -->
+            <div class="row">
+                <div class="col-12">
+                    <!-- Meta -->
+                    <div class="d-flex justify-content-between align-items-lg-center">
+                        <!-- Title -->
+                        <ul class="nav nav-divider align-items-center mb-0">
+                            <li class="nav-item h4">Specialist: {{doctorData.specialist}}</li>
+                        </ul>
+                        <!-- Buttons -->
+                        <!-- <div class="ms-3">
+                            <a href="#" class="btn btn-sm btn-light px-2 mb-0" role="button" id="dropdownShare" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-fw fa-share-alt"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end min-w-auto shadow rounded" aria-labelledby="dropdownShare">
+                                <li><a class="dropdown-item" href="#"><i class="fab fa-twitter-square me-2"></i>Twitter</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fab fa-facebook-square me-2"></i>Facebook</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fab fa-linkedin me-2"></i>LinkedIn</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-copy me-2"></i>Copy link</a></li>
+                            </ul>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- Title and button END -->
+        </div>
+    </section>
+    <!-- =======================
+    Main Banner END -->
+
+    <!-- =======================
+    Main Content START -->
+    <section class="pt-0">
+        <div class="container" data-sticky-container>
+            <div class="row g-4">
+
+                <!-- Main content START -->
+                <div class="col-xl-10">
+                    <div class="vstack gap-5">
+
+                        <!-- Main cab list START -->
+                        <div class="card border p-3">
+                            <!-- Card body START -->
+                            <div class="card-body p-0">
+                                <div class="row g-4 align-items-center">
+                                    <!-- Image -->
+                                    <div class="col-md-2">
+                                        <div class="rounded-3 px-2 py-5">
+                                            <img [src]="doctorData.profile_Img" alt="">
+                                        </div>
+                                    </div>
+
+                                    <!-- card body -->
+                                    <div class="col-md-8">
+                                        <!-- Title and rating -->
+                                        <div class="d-sm-flex justify-content-sm-between">
+                                            <!-- Card title -->
+                                            <div>
+                                                <h4 class="card-title mb-2">{{doctorData.first_Name}}
+                                                    {{doctorData.last_Name}}</h4>
+                                                <ul class="nav nav-divider h6 fw-normal mb-2">
+                                                    <li class="nav-item">Specialist</li>
+                                                    <li class="nav-item">{{doctorData.specialist}}</li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- List -->
+                                        <ul class="list-group list-group-borderless mt-2 mb-0">
+                                            <li class="list-group-item d-flex pb-0 mb-0">
+                                                <span class="h6 fw-normal mb-0"><i
+                                                        class="bi bi-check-circle me-2"></i>License :
+                                                    {{doctorData.license}}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex pb-0 mb-0">
+                                                <span class="h6 fw-normal mb-0"><i
+                                                        class="bi bi-check-circle me-2"></i>Appointment Fees :
+                                                    ₹{{doctorData.feesAmount}} at clinic</span>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card body END -->
+
+                            <!-- Card footer -->
+                            <!-- <div class="card-footer p-0 pt-4">
+                                <div class="hstack gap-3 flex-wrap">
+                              
+                                    <h6 class="bg-success bg-opacity-10 text-success fw-light rounded-2 d-inline-block mb-0 py-2 px-4">
+                                        Free Cancellation, till 1 hour of Pick up
+                                    </h6>                
+                        
+                                    <h6 class="bg-success bg-opacity-10 text-success fw-light rounded-2 d-inline-block mb-0 py-2 px-4">
+                                        Free waiting up to 45 minutes
+                                    </h6>
+                                </div>
+                            </div> -->
+                        </div>
+
+                        <div class="card border">
+                            <!-- Card header -->
+                            <div class="card-header border-bottom bg-transparent p-4">
+
+                                <h4 class="mb-0">Slot Details</h4>
+                                <div class="col-md-4 col-xl-4">
+                                    <label class="form-label">
+                                        <h6>Appointment Date</h6>
+                                    </label>
+                                    <input type="text" class="form-control form-control-lg flatpickr"
+                                        data-enableTime="false" placeholder="Select date">
+                                </div>
+                            </div>
+
+                            <!-- Card body START -->
+                            <div class="card-body">
+                                <!-- Form START -->
+
+                                <div class="grid-container">
+                                    <div class="row g-4">
+                                        <!-- Card item START -->
+                                        <div class="col-md-3 col-xl-4" *ngFor="let slot of slotData">
+                                            <div class="card p-2 pb-0 h-100">
+                                                <h6 class="badge text-bg-success"
+                                                    (click)="handleSlotClick(slot)" *ngIf="slot.status=='Available'">
+                                                    {{slot.startTimeslot | date:'h:mm a'}}
+                                                </h6>
+                                                <h6 class="badge text-bg-danger"
+                                                    *ngIf="slot.status=='Booked'">
+                                                    {{slot.startTimeslot | date:'h:mm a'}}
+                                                </h6>
+                                                <h6 class="badge text-bg-danger"
+                                                    *ngIf="slot.status=='Cancel'">
+                                                    {{slot.startTimeslot | date:'h:mm a'}}
+                                                </h6>
+                                                <h6 class="badge text-bg-danger"
+                                                    *ngIf="slot.status=='Reserved'">
+                                                    {{slot.startTimeslot | date:'h:mm a'}}
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Main content END -->
+
+
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    Main Content END -->
+
+</main>
+<!-- **************** MAIN CONTENT END **************** -->

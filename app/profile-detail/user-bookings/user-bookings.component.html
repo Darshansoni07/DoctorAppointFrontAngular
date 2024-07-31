@@ -1,0 +1,161 @@
+<div class="card border bg-transparent">
+    <!-- Card header -->
+    <div class="card-header bg-transparent border-bottom">
+        <h4 class="card-header-title">My Bookings</h4>
+    </div>
+
+    <!-- Card body START -->
+    <div class="card-body p-0">
+
+        <!-- Tabs -->
+        <div class="card-body">
+            <div class="page-content-wrapper p-xxl-4" [ngClass]="{'modal-open':showModal}">
+                <mat-table [dataSource]="dataMat" matSort class="mat-elevation-z8">
+
+                    <!-- Table columns -->
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="specialist">
+                        <mat-header-cell mat-sort-header mat-header-cell *matHeaderCellDef>Specialist</mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let appointment"><b>{{ appointment.specialist }} {{
+                                appointment.last_Name }}</b>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Mobile Number Column -->
+                    <ng-container matColumnDef="feesAmount">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Fees Amount</mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let appointment">{{ appointment.feesAmount }}</mat-cell>
+                    </ng-container>
+
+                    <!-- Appointment Time Column -->
+                    <ng-container matColumnDef="appointmentTime">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Appointment Time</mat-header-cell>
+                        <mat-cell *matCellDef="let appointment">{{ appointment.appointmentTime
+                            | date:'dd-MMM-yyyy HH:mma'}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                        <mat-cell *matCellDef="let appointment" [ngClass]="{
+                                    'text-success': appointment.status === 'Booked',
+                                    'text-info': appointment.status === 'Reserved' || appointment.status === 'Checked',
+                                    'text-warning': appointment.status === 'Available' || appointment.status === 'Pending',
+                                    'text-danger': appointment.status === 'Cancel'
+                                }">
+                            <b>{{ appointment.status }}</b>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Action">
+                        <mat-header-cell *matHeaderCellDef>Action/ ReportFile </mat-header-cell>
+                        <mat-cell *matCellDef="let appointment">
+                            <ng-container *ngIf="appointment.status == 'Booked'">
+                                <a (click)="onSelectGetAppointmentData(appointment.appointment_Id)" class="bi bi-pencil-square fa-fw me-2"></a>                                
+                            </ng-container>
+                            <ng-container *ngIf="appointment.reportFile != null">
+                                <a (click)="Download(appointment.reportFile)" class="bi bi-download fa-fw me-2"></a>
+                            </ng-container>
+                            <ng-container *ngIf="appointment.reportFile">
+                                <a (click)="OnSelectReportData(appointment.reportFile)" class="bi bi-file-earmark-text fa-fw me-2"></a>
+                            </ng-container>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Header and Rows -->
+                    <mat-header-row
+                        *matHeaderRowDef="['specialist','appointmentTime', 'status','feesAmount','Action']"></mat-header-row>
+                    <mat-row
+                        *matRowDef="let row; columns: ['specialist','appointmentTime','status','feesAmount','Action']"></mat-row>
+                </mat-table>
+
+                <!-- Pagination -->
+                <div class="paginator-container mat-elevation-z8">
+                    <mat-paginator #paginator [pageSizeOptions]="[5]" [length]="totalItem"
+                        showFirstLastButtons></mat-paginator>
+                </div>
+
+            </div>
+
+            <div *ngIf="showModal">
+
+                <div class="modal" tabindex="-1" role="dialog" style="display: block;">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Update Appointment</h5>
+                                <button type="button" class="close" (click)="closeModal()">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="container vstack gap-4">
+                                <!-- Title START -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <!-- Booking from START -->
+                                        <div class="form-control-bg-light bg-mode border p-4 rounded-3">
+                                            <!-- Tab content START -->
+                                            <div class="tab-content mt-0" id="pills-tabContent">
+                                                <!-- One way tab START -->
+                                                <div class="tab-pane fade show active" id="cab-one-way" role="tabpanel"
+                                                    aria-labelledby="cab-one-way-tab">
+                                                    <form [formGroup]="updateForm" class="row g-4 align-items-center"
+                                                        (ngSubmit)="updateOnSelect()">
+                                                        <div class="col-xl-10">
+                                                            <div class="row g-2">
+
+                                                                <!-- Drop -->
+                                                                <div class="col-md-6 col-xl-6">
+                                                                    <div class="form-size-lg">
+                                                                        <label class="form-label">Status:</label>
+                                                                        <select class="form-select js-choice"
+                                                                            data-search-enabled="true"
+                                                                            aria-label=".form-select-sm"
+                                                                            formControlName="status">
+                                                                            <option value="">Select Available</option>
+                                                                            <option value="Cancel">Cancel</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Date -->
+                                                                <div class="col-md-6 col-xl-6">
+                                                                    <label class="form-label">Appointment Time</label>
+                                                                    <input type="text"
+                                                                        class="form-control form-control-lg"
+                                                                        data-enableTime="false"
+                                                                        placeholder="Select date"
+                                                                        formControlName="appointmentTime" readonly>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6 col-xl-6 mt-xl-auto">
+                                                            <button class="btn btn-lg btn-primary mb-0"
+                                                                type="submit">Submit</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- One way tab END -->
+
+                                            </div>
+                                            <!-- Tab content END -->
+                                        </div>
+                                        <!-- Booking from END -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+<!-- Card body END -->

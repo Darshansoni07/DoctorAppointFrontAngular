@@ -1,0 +1,244 @@
+<div class="container vstack gap-4" [ngClass]="{'modal-open':showModal}">
+    <!-- Title START -->
+    <div class="row">
+        <div class="col-12">
+            <h1 class="fs-4 mb-0"><i class="bi bi-bookmark-heart fa-fw me-1"></i>Booking</h1>
+        </div>
+    </div>
+    <!-- Title END -->
+
+    <!-- Booking table START -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border rounded-3">
+                <!-- Card header START -->
+                <div class="card-header border-bottom">
+                    <div class="d-sm-flex justify-content-between align-items-center">
+                        <h5 class="mb-2 mb-sm-0">Pending Approve Appointment </h5>
+                        <!-- <a href="#" class="btn btn-sm btn-primary mb-0">View All</a> -->
+                    </div>
+                </div>
+
+                <table class="table align-middle p-4 mb-0 table-hover table-shrink">
+                    <app-doctor-client-appointment-pending></app-doctor-client-appointment-pending>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Booking table END -->
+
+
+    <!-- Booking table START -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border rounded-3">
+                <!-- Card header START -->
+                <div class="card-header border-bottom">
+                    <div class="d-sm-flex justify-content-between align-items-center">
+                        <h5 class="mb-2 mb-sm-0">Appointment Details</h5>
+                        <!-- <a href="#" class="btn btn-sm btn-primary mb-0">View All</a> -->
+                    </div>
+                </div>
+                <!-- Card header END -->
+                <!-- Card body START -->
+                <div class="card-body">
+                    <!-- Search and select START -->
+                    <div class="row g-3 align-items-center justify-content-between mb-3">
+                        <!-- Search -->
+                    </div>
+                    <!-- Search and select END -->
+
+                    <!-- Hotel room list START -->
+                    <div class="table-responsive border-0">
+                        <table class="table align-middle p-4 mb-0 table-hover table-shrink">
+                            <!-- Table head -->
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col" class="border-0">Name</th>
+                                    <th scope="col" class="border-0">Mobile Number</th>
+                                    <th scope="col" class="border-0">Appointment Time</th>
+                                    <th scope="col" class="border-0">Status</th>
+                                    <th scope="col" class="border-0 rounded-end">Action</th>
+                                    <th scope="col" class="border-0 rounded-end">Report File</th>
+                                    
+                                </tr>
+                            </thead>
+
+                            <!-- Table body START -->
+                            <tbody class="border-top-0">
+                                <tr *ngFor="let appoint of approvedAppointmentData">
+                                    <td>
+                                        <h6 class="mb-0"><a
+                                                (click)="getUserDetailById(appoint.userDetailsUser_Id)">{{appoint.first_Name}}
+                                                {{appoint.last_Name}}</a></h6>
+                                    </td>
+                                    <td> {{appoint.phoneNumber}}</td>
+                                    <td> {{appoint.appointmentTime |date:'dd-MMM-yyyy'}} {{appoint.appointmentTime |
+                                        date:'hh:mm a'}}</td>
+                                    <td *ngIf="appoint.status=='Booked'">
+                                        <div class="badge text-bg-success">Booked</div>
+                                    </td>
+                                    <td *ngIf="appoint.status=='Checked'">
+                                        <div class="badge text-bg-info">Checked</div>
+                                    </td>
+                                    <td *ngIf="appoint.status=='Available'">
+                                        <div class="badge text-bg-warning">Available</div>
+                                    </td>
+                                    <td *ngIf="appoint.status=='Cancel'">
+                                        <div class="badge text-bg-danger">Cancel</div>
+                                    </td>
+                                    <td *ngIf="appoint.status=='Pending'">
+                                        <div class="badge text-bg-danger">Pending</div>
+                                    </td>
+                                    <td> <a (click)="onSelectGetAppointmentData(appoint.appointment_Id)"
+                                            class="bi bi-pencil-square fa-fw me-2"></a>                                        
+                                    </td>
+                                    <td>
+                                        <a *ngIf="appoint.reportFile" (click)="Download(appoint.reportFile)"
+                                            class="bi bi-download fa-fw me-2"></a>
+                                            <a *ngIf="appoint.reportFile" (click)="OnSelectReportData(appoint.reportFile)"
+                                            class="bi bi-file-earmark-text fa-fw me-2"></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <!-- Table body END -->
+                        </table>
+                    </div>
+                    <!-- Hotel room list END -->
+                </div>
+                <!-- Card footer START -->
+                <div class="card-footer pt-0">
+                    <!-- Pagination and content -->
+                    <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                        <!-- Content -->
+                        <!-- Pagination -->
+                        <nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
+                            <ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                                <li class="page-item mb-0" (click)="onPageChange(pageIndexAA - 1)"><a class="page-link"
+                                        tabindex="-1"><i class="fa-solid fa-angle-left"></i></a></li>
+                                <li class="page-item mb-0" *ngFor="let i of getPaginationIndices()"><a class="page-link"
+                                        [class.active]="pageIndexAA === i">{{pageIndexAA+1}}</a></li>
+
+                                <li class="page-item mb-0" (click)="onNextButtonClick()"
+                                    [class.disabled]="isNextButtonDisabled()">
+                                    <a class="page-link">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- Card footer END -->
+
+                <!-- Card footer END -->
+            </div>
+        </div>
+    </div>
+    <!-- Booking table END -->
+
+</div>
+
+<!-- Model Start Popup Page -->
+<div *ngIf="showModal">
+
+    <div class="modal" tabindex="-1" role="dialog" style="display: block;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Appointment</h5>
+                    <button type="button" class="close" (click)="closeModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="container vstack gap-4">
+                    <!-- Title START -->
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Booking from START -->
+                            <div class="form-control-bg-light bg-mode border p-4 rounded-3">
+                                <!-- Tab content START -->
+                                <div class="tab-content mt-0" id="pills-tabContent">
+                                    <!-- One way tab START -->
+                                    <div class="tab-pane fade show active" id="cab-one-way" role="tabpanel"
+                                        aria-labelledby="cab-one-way-tab">
+                                        <form [formGroup]="updateForm" class="row g-4 align-items-center"
+                                            (ngSubmit)="updateOnSelect()">
+                                            <div class="col-xl-10">
+                                                <div class="row g-2">
+
+                                                    <!-- Drop -->
+                                                    <div class="col-md-6 col-xl-6">
+                                                        <div class="form-size-lg">
+                                                            <label class="form-label">Status:</label>
+                                                            <select class="form-select js-choice"
+                                                                data-search-enabled="true" aria-label=".form-select-sm"
+                                                                formControlName="status">
+                                                                <option value="">Select Available</option>
+                                                                <option value="Booked">Booked</option>
+                                                                <option value="Checked">Checked</option>
+                                                                <option value="Cancel">Cancel</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Date -->
+                                                    <div class="col-md-6 col-xl-6">
+                                                        <label class="form-label">Appointment Time</label>
+                                                        <input type="text"
+                                                            class="form-control form-control-lg flatpickr"
+                                                            data-enableTime="false" placeholder="Select date"
+                                                            formControlName="appointmentTime">
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <label class="form-label">Blood Pressure</label>
+                                                        <input class="form-control" rows="3" formControlName="BP">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label class="form-label">Heart Rate</label>
+                                                        <input class="form-control" rows="3"
+                                                            formControlName="HeartRate">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label class="form-label">Sugar Messure</label>
+                                                        <input class="form-control" rows="3" formControlName="Sugar">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label class="form-label">Details</label>
+                                                        <textarea class="form-control" rows="3"
+                                                            formControlName="Description"></textarea>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label class="form-label">Medicine</label>
+                                                        <textarea class="form-control" rows="3"
+                                                            formControlName="Medicine"> </textarea>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-xl-6 mt-xl-auto">
+                                                <button class="btn btn-lg btn-primary mb-0"
+                                                    type="submit">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- One way tab END -->
+
+                                </div>
+                                <!-- Tab content END -->
+                            </div>
+                            <!-- Booking from END -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Model End Popup Page -->

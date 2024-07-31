@@ -1,0 +1,248 @@
+<div class="container vstack gap-4">
+    <div class="row g-4 mb-5">
+        <!-- Agent info START -->
+        <div class="col-md-4 col-xxl-3">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Card body -->
+                        <div class="card-body text-center">
+                            <!-- Avatar Image -->
+                            <div class="avatar avatar-xl flex-shrink-0 mb-3" *ngIf="patientData.profile_Img != null">
+                                <img class="avatar-img rounded-circle" src={{patientData.profile_Img}} alt="avatar">
+                            </div>
+                            <h5 class="mb-2">{{patientData.first_Name}} {{patientData.last_Name}}</h5>
+                        </div>
+                        <!-- Card footer -->
+                        <div class="card-footer bg-light border-top">
+                            <h6 class="mb-3">Contact Details</h6>
+                            <!-- Email id -->
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-md bg-mode h6 mb-0 rounded-circle flex-shrink-0"><i
+                                        class="bi bi-envelope-fill"></i></div>
+                                <div class="col-md-6">
+                                    <small>Email id</small>
+                                    <h6 class="fw-normal small mb-0"><a>{{patientData.email}}</a></h6>
+                                </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-md bg-mode h6 mb-0 rounded-circle flex-shrink-0"><i
+                                        class="bi bi-telephone-fill"></i></div>
+                                <div class="col-md-6">
+                                    <small>Phone</small>
+                                    <h6 class="fw-normal small mb-0"><a>{{patientData.phoneNumber}}</a></h6>
+                                </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-md bg-mode h6 mb-0 rounded-circle flex-shrink-0"><i
+                                        class="bi bi-geo-alt-fill"></i></div>
+                                <div class="col-md-6">
+                                    <small>Address</small>
+                                    <h6 class="fw-normal small mb-0">{{patientData.address}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Agent info END -->
+
+        <div class="col-md-8 col-xxl-9">
+            <div class="row g-4">
+                <!-- Personal info START -->
+                <div class="card shadow">
+                    <!-- Card header -->
+                    <div class="card-header border-bottom">
+                        <h5 class="mb-0">Patient Information</h5>
+                    </div>
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Information item -->
+                            <div class="col-md-6">
+                                <ul class="list-group list-group-borderless">
+                                    <li class="list-group-item mb-3">
+                                        <span>Full Name:</span>
+                                        <span class="h6 fw-normal ms-1 mb-0">{{patientData.first_Name}}
+                                            {{patientData.last_Name}}</span>
+                                    </li>
+
+                                    <li class="list-group-item mb-3">
+                                        <span>Mobile Number:</span>
+                                        <span class="h6 fw-normal ms-1 mb-0">{{patientData.phoneNumber}}</span>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <!-- Information item -->
+                            <div class="col-md-6">
+                                <ul class="list-group list-group-borderless">
+                                    <li class="list-group-item mb-3">
+                                        <span>Email ID:</span>
+                                        <span class="h6 fw-normal ms-1 mb-0">{{patientData.email}}</span>
+                                    </li>
+                                    <li class="list-group-item mb-3">
+                                        <span>Gender:</span>
+                                        <span class="h6 fw-normal ms-1 mb-0">{{patientData.gender}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Information item -->
+                            <div class="col-12">
+                                <ul class="list-group list-group-borderless">
+                                    <li class="list-group-item">
+                                        <span>Description: </span>
+                                        <p class="h6 fw-normal mb-0">
+                                            As it so contrasted oh estimating instrument. Size-like
+                                            body someone had. Are conduct viewing boy minutes warrant the expense
+                                            Tolerably
+                                            behavior may admit daughters offending her ask own? Praise effect wishes to
+                                            change way and any wanted. Lively use looked latter regard had. Does he it
+                                            part
+                                            last in
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal info END -->
+                <div class="card shadow">
+                    <!-- Page main content START -->
+                    <div class="page-content-wrapper p-xxl-4">
+
+                        <!-- Title -->
+                        <div class="card-header border-bottom">
+                            <h5 class="mb-0">Patient Checkup list</h5>
+                        </div>
+
+                        <!-- Guest list START -->
+                        <div class="card-body border-bottom">
+                            <!-- Card body START -->
+                            <div class="card-body">
+                                <!-- Table head -->
+                                <div class="bg-light rounded p-3 d-none d-lg-block">
+                                    <div class="row row-cols-7 g-4">
+                                        <div class="col">
+                                            <h6 class="mb-0">Appointment Date</h6>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="mb-0">Status</h6>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="mb-0">Booking On</h6>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="mb-0">Action</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Table data  loop yha lagega -->
+                                <div *ngFor="let client of ClientData"
+                                    class="row row-cols-xl-7 align-items-lg-center border-bottom g-4 px-2 py-4">
+                                    <!-- Data item -->
+                                    <div class="col">
+                                        <small class="d-block d-lg-none">Appointment Date:</small>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-2">
+                                                <h6 class="mb-0 fw-light">
+                                                    {{client.appointmentTime |date:'dd-MMM-yyyy hh:mm a' }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Data item -->
+                                    <div class="col">
+                                        <small class="d-block d-lg-none">Status:</small>
+                                        <h6 class="mb-0 fw-normal">{{client.status}}</h6>
+                                    </div>
+
+                                    <!-- Data item -->
+                                    <div class="col">
+                                        <small class="d-block d-lg-none">Booking On:</small>
+                                        <h6 class="mb-0 fw-normal">{{client.createdOn | date:'dd-MMM-yyyy hh:mm a'}}
+                                        </h6>
+                                    </div>
+
+                                    <!-- Data item -->
+                                    <div class="col">
+                                        <small class="d-block d-lg-none">Action:</small>
+                                        <h6 class="mb-0 fw-normal">
+                                            <a *ngIf="client.reportFile" (click)="Download(client.reportFile)"
+                                                class="bi bi-download fa-fw me-2"></a>
+                                            <a *ngIf="client.reportFile" (click)="OnSelectReportData(client.reportFile)"
+                                                class="bi bi-file-earmark-text fa-fw me-2"></a>
+                                        </h6>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- Card body END -->
+
+                            <!-- Card footer START -->
+                            <div class="card-footer pt-0">
+                                <!-- Pagination and content -->
+                                <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                                    <!-- Content -->
+
+                                    <!-- Pagination -->
+                                    <nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
+                                        <ul
+                                            class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                                            <li class="page-item mb-0" (click)="onPageChange(pageIndex - 1)"><a
+                                                    class="page-link" tabindex="-1"><i
+                                                        class="fa-solid fa-angle-left"></i></a>
+                                            </li>
+                                            <li class="page-item mb-0" *ngFor="let i of getPaginationIndices()"><a
+                                                    class="page-link" [class.active]="pageIndex === i"
+                                                    (click)="onPageChange(i)">{{pageIndex+1}}</a>
+                                            </li>
+                                            <li class="page-item mb-0" (click)="onNextButtonClick()"
+                                                [class.disabled]="isNextButtonDisabled()">
+                                                <a class="page-link">
+                                                    <i class="fa-solid fa-angle-right"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+
+                                </div>
+                            </div>
+                            <!-- Card footer END -->
+                        </div>
+                        <!-- Guest list END -->
+                    </div>
+                </div>
+
+                
+                <div class="card shadow">
+                    <div class="page-content-wrapper p-xxl-4">
+                        <div class="card-header border-bottom">
+                            <h5 class="mb-0">Patient Report Chart</h5>
+                        </div>
+                        <div class="card-body border-bottom">
+                            <div class="card-footer pt-0">
+                                <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                                    <ngx-charts-line-chart [view]="[800, 400]" [results]="chartData" [gradient]="false"
+                                        [xAxis]="true" [yAxis]="true" [legend]="true" [showXAxisLabel]="true"
+                                        [showYAxisLabel]="true" xAxisLabel="Date" yAxisLabel="Value">
+                                    </ngx-charts-line-chart>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

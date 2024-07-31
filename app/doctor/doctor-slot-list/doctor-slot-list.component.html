@@ -1,0 +1,163 @@
+<div class="container vstack gap-4" [ngClass]="{'modal-open':showModal}">
+    <!-- Title START -->
+    <div class="row">
+        <div class="col-12">
+            <h1 class="fs-4 mb-0"><i class="bi bi-journals fa-fw me-1"></i>Slot List</h1>
+        </div>
+    </div>
+    <!-- Title END -->
+
+    <!-- Booking table START -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border">
+
+                <mat-table [dataSource]="dataMat" matSort class="mat-elevation-z8">
+
+                    <!-- Table columns -->
+            
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="startTimeslot">
+                        <mat-header-cell mat-sort-header mat-header-cell *matHeaderCellDef>Start Time</mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let appointment">{{ appointment.startTimeslot | date:'dd-MMM-yyyy HH:mma'}} {{
+                                appointment.last_Name }}
+                        </mat-cell>
+                    </ng-container>
+            
+                    <!-- Mobile Number Column -->
+                    <ng-container matColumnDef="endTimeslot">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>EndTime</mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let appointment">{{ appointment.endTimeslot | date:'dd-MMM-yyyy HH:mma'}}</mat-cell>
+                    </ng-container>
+            
+                    <!-- Appointment Time Column -->
+                    <ng-container matColumnDef="createdOn">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>CreatedOn</mat-header-cell>
+                        <mat-cell *matCellDef="let appointment">{{ appointment.createdOn
+                            | date:'dd-MMM-yyyy'}}</mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                        <mat-cell *matCellDef="let appointment" [ngClass]="{
+                                    'text-info': appointment.status === 'Reserved',
+                                    'text-warning': appointment.status === 'Available',
+                                    'text-danger': appointment.status === 'Cancel',
+                                    'text-success': appointment.status === 'Booked'
+                                }">
+                            <b>{{ appointment.status }}</b>
+                        </mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="Action">
+                        <mat-header-cell *matHeaderCellDef >Action</mat-header-cell>
+                        <mat-cell *matCellDef="let appointment">
+                            <ng-container *ngIf="!(appointment.status == 'Booked')">
+                            <a (click)="onSelectSlotId(appointment.slotId)"
+                                class="bi bi-pencil-square fa-fw me-2"></a>
+                            </ng-container>
+                        </mat-cell>
+                    </ng-container>
+            
+                    <!-- Header and Rows -->
+                    <mat-header-row
+                        *matHeaderRowDef="['startTimeslot', 'endTimeslot', 'createdOn', 'status','Action']"></mat-header-row>
+                    <mat-row
+                        *matRowDef="let row; columns: ['startTimeslot', 'endTimeslot', 'createdOn','status','Action']"></mat-row>
+                </mat-table>
+            
+                <!-- Pagination -->
+                <div class="paginator-container mat-elevation-z8">
+                    <mat-paginator #paginator [pageSizeOptions]="[5]" [length]="totalItem" showFirstLastButtons></mat-paginator>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Booking table END -->
+</div>
+
+<div *ngIf="showModal">
+
+    <div class="modal" tabindex="-1" role="dialog" style="display: block;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Slot</h5>
+                    <button type="button" class="close" (click)="closeModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="container vstack gap-4">
+                    <!-- Title START -->
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Booking from START -->
+                            <div class="form-control-bg-light bg-mode border p-4 rounded-3">
+
+                                <!-- Tab content START -->
+                                <div class="tab-content mt-0" id="pills-tabContent">
+                                    <!-- One way tab START -->
+                                    <div class="tab-pane fade show active" id="cab-one-way" role="tabpanel"
+                                        aria-labelledby="cab-one-way-tab">
+                                        <form [formGroup]="updateForm" class="row g-4 align-items-center"
+                                            (ngSubmit)="updateOnSelect()">
+                                            <div class="col-xl-10">
+                                                <div class="row g-2">
+
+                                                    <!-- Drop -->
+                                                    <div class="col-md-6 col-xl-6">
+                                                        <div class="form-size-lg">
+                                                            <label class="form-label">Available:</label>
+                                                            <select class="form-select js-choice"
+                                                                data-search-enabled="true" aria-label=".form-select-sm"
+                                                                formControlName="status">
+                                                                <option value="">Select Available</option>
+                                                                <option value="Available">Available</option>
+                                                                <!-- <option value="Booked">Booked</option> -->
+                                                                <option value="Reserved">Reserved</option>
+                                                                <option value="Cancel">Cancel</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Date -->
+                                                    <div class="col-md-6 col-xl-6">
+                                                        <label class="form-label">Start Time Slot</label>
+                                                        <input type="text"
+                                                            class="form-control form-control-lg flatpickr"
+                                                            data-enableTime="false" placeholder="Select date"
+                                                            formControlName="startTimeslot">
+
+                                                    </div>
+
+                                                    <div class="col-md-6 col-xl-6">
+                                                        <label class="form-label">End Time Slot</label>
+                                                        <input type="text"
+                                                            class="form-control form-control-lg flatpickr"
+                                                            data-enableTime="true" data-noCalendar="true"
+                                                            placeholder="Select time" formControlName="endTimeslot">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-xl-6 mt-xl-auto">
+                                                <button class="btn btn-lg btn-primary mb-0" type="submit">Update
+                                                    Slot</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- One way tab END -->
+
+                                </div>
+                                <!-- Tab content END -->
+                            </div>
+                            <!-- Booking from END -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

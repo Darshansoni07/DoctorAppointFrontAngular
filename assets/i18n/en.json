@@ -1,0 +1,60 @@
+{
+    "discoverConnect": "Discover & Connect With Great Places",
+    "letsDiscover": "Let's Discover",
+    "searchLocationPlaceholder": "Search Location ...",
+    "language": "Language",
+    
+    "stateLabel": "State",
+    "cityLabel": "City",
+    "enterStatePlaceholder": "Enter State Name",
+    "enterCityPlaceholder": "Enter City Name",
+    "applyFiltersBtn": "Apply Filters",
+    "featuredHomeRentTitle": "Featured Home Rent",
+
+
+    "Advance Filters": "Advance Filters",
+    "Type of Property": "Type of Property",
+    "Independent House/Villa": "Independent House/Villa",
+    "Residential Apartment": "Residential Apartment",
+    "Independent/Builder Floor": "Independent/Builder Floor",
+    "Flat": "Flat",
+    "Room": "Room",
+    "Price": "Price",
+    "Clear all": "Clear all",
+    "Filter Result": "Filter Result",
+
+
+    "No. Of Bedrooms": "No. Of Bedrooms",
+    "1 RK": "1 RK",
+    "1 BHK": "1 BHK",
+    "2 BHK": "2 BHK",
+    "3 BHK": "3 BHK",
+    "4 BHK": "4 BHK",
+    "5+ BHK": "5+ BHK",
+    "Available for": "Available for",
+    "Family": "Family",
+    "Girls": "Girls",
+    "Boys": "Boys",
+    "All": "All",
+    "Office": "Office",
+    "No. of Bathrooms": "No. of Bathrooms",
+    "Amenities": "Amenities",
+    "Parking": "Parking",
+    "Lift": "Lift",
+    "Park": "Park",
+    "Gymnasium": "Gymnasium",
+    "Club house": "Club house",
+    "Swimming Pool": "Swimming Pool",
+    "AC Room": "AC Room",
+    "Age of Property": "Age of Property",
+    "0-1 years old": "0-1 years old",
+    "1-5 years old": "1-5 years old",
+    "5-10 years old": "5-10 years old",
+    "10+ years old": "10+ years old",
+    "20+ years old": "20+ years old",
+    "30+ years old": "30+ years old"
+
+
+
+    
+  }
